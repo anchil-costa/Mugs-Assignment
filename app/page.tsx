@@ -1,112 +1,237 @@
-import Image from "next/image";
+'use client';
+
+import Button from '@/components/Button';
+import SkillSlider from '@/components/Slider';
+import ServiceCard from '@/components/ServiceCard';
+import ProjectCard from '@/components/ProjectCard';
+import ProjectFilter from '@/components/ProjectFilter';
+import TestimonialSlider from '@/components/TestimonialSlider';
+import Image1 from '@/public/image1.png';
+import Image2 from '@/public/image2.png';
+import UiImage from '@/public/ui_img.png';
+import AdImage from '@/public/ad_img.png';
+import GdImage from '@/public/gd_img.png';
+import WdImage from '@/public/wd_img.png';
+import WdProj1 from '@/public/wd_proj1.png';
+import WdProj2 from '@/public/wd_proj2.png';
+import WdProj3 from '@/public/wd_proj3.png';
+import SocialLogos from '@/components/SocialLogos';
+import Image from 'next/image';
+import { useState } from 'react';
+
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState('Web Design');
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+
+  const categories = ['All', 'UI/UX', 'Web Design', 'App Design', 'Graphic Design'];
+
+  const skills = [
+    { name: 'UX', value: 90 },
+    { name: 'Website Design', value: 75 },
+    { name: 'App Design', value: 85 },
+    { name: 'Graphic Design', value: 70 },
+  ];
+
+  const services = [
+    {
+      icon: UiImage,
+      title: 'UI/UX',
+      description: 'Lorem ipsum dolor sit amet consectetur. Morbi diam nisi nam diam interdum.',
+    },
+    {
+      icon: WdImage,
+      title: 'Web Design',
+      description: 'Lorem ipsum dolor sit amet consectetur. Morbi diam nisi nam diam interdum.',
+    },
+    {
+      icon: AdImage,
+      title: 'App Design',
+      description: 'Lorem ipsum dolor sit amet consectetur. Morbi diam nisi nam diam interdum.',
+    },
+    {
+      icon: GdImage,
+      title: 'Graphic Design',
+      description: 'Lorem ipsum dolor sit amet consectetur. Morbi diam nisi nam diam interdum.',
+    },
+  ];
+
+  const projects = [
+    {
+      image: WdProj1,
+      title: 'AirCalling Landing Page Design',
+      category: 'Web Design',
+    },
+    {
+      image: WdProj2,
+      title: 'Business Landing Page Design',
+      category: 'Web Design',
+    },
+    {
+      image: WdProj3,
+      title: 'Ecom Web Page Design',
+      category: 'Web Design',
+    },
+  ];
+
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
+    <main className="flex flex-col poppins">
+      {/* Hero Section */}
+      <div className="lg:flex justify-between  mt-[60px] gap-8 px-4 sm:px-16 lg:px-40 space-y-12 lg:space-y-0">
+        <div className='flex flex-col mt-[0px] lg:mt-[50px]'>
+        <div className="flex flex-col items-center lg:items-start ">
+          <p className="poppins text-[24px] font-semibold">Hi I am</p>
+          <p className="poppins text-[32px] font-semibold text-[#FD6F00]">
+            Muhammad Umair
+          </p>
+        </div>
+        <div className="flex flex-col items-center lg:items-start gap-4">
+          <p className="text-[60px] font-bold">UI & UX</p>
+          <p className="text-[60px] font-bold">Designer</p>
+        </div>
+        <p className="poppins lg:w-[669px] leading-[31.5px] text-[18px] text-center lg:text-start ">
+          Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa
+          nibh lectus netus in. Aliquet donec morbi convallis pretium.
+          Turpis tempus pharetra
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+        <div className="flex justify-center lg:justify-start space-x-4 mt-[18px]">
+          <Button label="Hire me" />
+        </div>
+        </div>
+        <div className='flex flex-col items-center justify-center  lg:justify-start space-y-6'>
+        <div className="relative w-[340px] h-[340px]">
+          <Image
+            src={Image1}
+            alt="Product Image"
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+        <div className="flex justify-center items-center">
+          <SocialLogos />
+        </div>
         </div>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* About Section */}
+      <div className=" lg:flex   justify-between mt-[110px] gap-8 px-4 sm:px-16 lg:px-40">
+        <div className='flex flex-col'>
+        <div className="flex lg:justify-start justify-center gap-4">
+          <p className="text-[60px] font-semibold">About me</p>
+        </div>
+        <p className="poppins lg:w-[669px] leading-[31.5px] text-[18px] text-center lg:text-start">
+          Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa
+          nibh lectus netus in. Aliquet donec morbi convallis pretium.
+          Turpis tempus pharetra
+        </p>
+        <div className="w-[350px] lg:w-[640px]">
+          {skills.map((skill, index) => (
+            <SkillSlider key={index} skillName={skill.name} value={skill.value} />
+          ))}
+        </div>
+        </div>
+        <div className='flex lg:justify-start justify-center mt-[30px] lg:mt-0'>
+        <div className="relative w-[340px] h-[340px]">
+          <Image
+            src={Image2}
+            alt="Product Image"
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+        </div>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
+      {/* Services Section */}
+      <div className="flex flex-col items-center mt-[60px] gap-8 px-4 sm:px-16 lg:px-24">
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-[60px] font-bold">Services</p>
+          <p className="text-center">
+            Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa
+            nibh lectus netus in. Aliquet donec morbi convallis pretium
           </p>
-        </a>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
+      </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
+      {/* Projects Section */}
+      <div className="flex flex-col items-center mt-[60px] gap-8 px-4 sm:px-20 lg:px-24">
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-[60px] font-bold">My Projects</p>
+          <p className="text-center">
+            Lorem ipsum dolor sit amet consectetur. Mollis erat duis aliquam
+            mauris est risus lectus. Phasellus consequat urna tellus
           </p>
-        </a>
+        </div>
+        <div className="max-w-7xl mx-auto p-6">
+          <ProjectFilter
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                image={project.image}
+                title={project.title}
+                category={project.category}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
+      {/* Testimonials Section */}
+      <div className="flex flex-col items-center mt-[60px] gap-8 px-4 sm:px-16 lg:px-24">
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-[60px] font-bold">Testimonials</p>
+          <p className="text-center">
+            Lorem ipsum dolor sit amet consectetur. Mollis erat duis aliquam
+            mauris est risus lectus. Phasellus consequat urna tellus
           </p>
-        </a>
+        </div>
+        <div className="max-w-4xl mx-auto p-6">
+          <TestimonialSlider />
+        </div>
+      </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+      {/* Contact Section */}
+      <div className="flex flex-col items-center mt-[60px] gap-8 px-4 sm:px-16 lg:px-24">
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-[60px] font-bold">Lets Design Together</p>
+          <p className="text-center">
+            Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa
+            nibh lectus netus in. Aliquet donec morbi convallis pretium
           </p>
-        </a>
+        </div>
+        <div className="flex items-center space-x-4">
+          <input
+            className="w-[627px] h-[40px] px-4 rounded-[14px] bg-[#F8F8F8] border-[#AFAFAF] text-[#797979]"
+            type="email"
+            placeholder="Enter your email"
+          />
+          <Button label="Contact me" />
+        </div>
       </div>
     </main>
   );
