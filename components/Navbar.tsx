@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className='flex pt-[40px] px-[150px]'>
     <div className='flex items-center justify-between h-[67px] w-[1420px]'>
       <div className='text-[25px] md:text-[18px]'>
-        <Image src={Logo}></Image>
+        <Image src={Logo} alt='Logo'></Image>
       </div>
       <div className='lg:hidden flex'><FiMenu onClick={toggleMenu} size={28}/></div>
       <div className='hidden lg:flex '>
